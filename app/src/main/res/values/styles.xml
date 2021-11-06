@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="STYLE_NORMAL">
+        <item name="android:background">@color/light_brown</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHighlight">@color/black</item>
+    </style>
+
+    <style name="kaz_style">
+        <item name="android:background">@color/light_brown</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textColorHighlight">@color/black</item>
+    </style>
+</resources>

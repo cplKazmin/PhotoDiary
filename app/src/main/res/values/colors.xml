@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="brown_200">#68430C</color>
+    <color name="brown_500">#36260D</color>
+    <color name="light_brown">#B89561</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#4C3514</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="list_item_color">#6B87E9</color>
+    <color name="list_item_color_right">#7B90DC</color>
+</resources>
