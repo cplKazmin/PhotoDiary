@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ikazmin.photodiary.R
 import com.ikazmin.photodiary.shotDatabase.Shot
 import androidx.recyclerview.widget.ListAdapter
+import com.ikazmin.photodiary.Utils
+import com.ikazmin.photodiary.Utils.myDateFormat
+import com.ikazmin.photodiary.Utils.myTimeFormat
 
 class ShotAdapter (private val shotOnClickListener: ShotOnClickListener)  : ListAdapter<Shot,ShotAdapter.ViewHolder>(ShotDiffCallback()) {
 
@@ -37,20 +40,15 @@ class ShotAdapter (private val shotOnClickListener: ShotOnClickListener)  : List
 
     inner class ViewHolder (ItemView: View) : RecyclerView.ViewHolder(ItemView){
 
-        val shotName: TextView = itemView.findViewById(R.id.shot_name)
-        val shotIso: TextView = itemView.findViewById(R.id.shot_iso)
-        val shotDiafragm: TextView = itemView.findViewById(R.id.shot_diafragm)
-        val shotShutterSpeed: TextView = itemView.findViewById(R.id.shot_shutterspeed)
-        val shotDate: TextView = itemView.findViewById(R.id.shot_date)
-        val shotTime: TextView = itemView.findViewById(R.id.shot_time)
+        private val shotName: TextView = itemView.findViewById(R.id.shot_name)
+        private val shotIso: TextView = itemView.findViewById(R.id.shot_iso)
+        private val shotDiafragm: TextView = itemView.findViewById(R.id.shot_diafragm)
+        private val shotShutterSpeed: TextView = itemView.findViewById(R.id.shot_shutterspeed)
+        private val shotDate: TextView = itemView.findViewById(R.id.shot_date)
+        private val shotTime: TextView = itemView.findViewById(R.id.shot_time)
 
-        @RequiresApi(Build.VERSION_CODES.N)
-        val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy")
 
-        @RequiresApi(Build.VERSION_CODES.N)
-        val simpleTimeFormat = SimpleDateFormat("h:mm a")
 
-        @RequiresApi(Build.VERSION_CODES.N)
         fun bind(
             item: Shot
         ) {
@@ -58,11 +56,9 @@ class ShotAdapter (private val shotOnClickListener: ShotOnClickListener)  : List
             shotIso.text = item.iso
             shotDiafragm.text = item.diafragm
             shotShutterSpeed.text = item.shutterSpeed
-            shotDate.text = simpleDateFormat.format(item.date)
-            shotTime.text = simpleTimeFormat.format(item.date)
+            shotDate.text = myDateFormat.format(item.date)
+            shotTime.text = myTimeFormat.format(item.date)
         }
-
-
         }
     }
 

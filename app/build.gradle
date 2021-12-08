@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.ikazmin.photodiary"
-        minSdk 28
+        minSdk 24
         targetSdk 31
         versionCode 1
         versionName "1.0"
@@ -34,7 +34,6 @@ android {
     dataBinding {
         enabled true
     }
-   // configurations { implementation.exclude group: 'org.jetbrains', module: 'annotations' }
 }
 
 
@@ -60,9 +59,6 @@ dependencies {
             "x.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.0"
-
-//    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
-//    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.3.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.3.5")

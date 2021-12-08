@@ -34,15 +34,22 @@ import java.net.URI
 
 
 class ShotDetailsViewModel (
-    private val database: ShotDao,application: Application, private val key: String
+    private val database: ShotDao,application: Application,
+    private val key: String
 ):AndroidViewModel(application) {
 
     private val _navigateToMainPage = MutableLiveData<Boolean?>()
+
     val navigateToMainPage: LiveData<Boolean?>
         get() = _navigateToMainPage
-        val shot = MutableLiveData<Shot>()
 
+    val shot = MutableLiveData<Shot>()
 
+    val dialog = DeleteDialog()
+
+    val description = MutableLiveData<String>()
+
+    val imageUriString = MutableLiveData<String>()
 
     val textForShare=
         "Shot name: ${shot.value?.name}\n" +
@@ -51,16 +58,14 @@ class ShotDetailsViewModel (
                 "${shot.value?.shutterSpeed}"
 
 
-
     val sendIntent: Intent = Intent().apply {
         action = Intent.ACTION_SEND
         type = "text/*"
         putExtra(Intent.EXTRA_TEXT, textForShare)}
 
-
-
-
-
+    val getPictureIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+        type = "image/*"
+    }
 
 
 
@@ -72,11 +77,6 @@ class ShotDetailsViewModel (
         _navigateToMainPage.value = true
         dialog.isPositive.value = false
     }
-
-    val dialog = DeleteDialog()
-
-
-    val description = MutableLiveData<String>()
 
     fun onDescriptionAdded() {
         viewModelScope.launch {
@@ -91,9 +91,6 @@ class ShotDetailsViewModel (
         }
     }
 
-
-    val imageUriString = MutableLiveData<String>()
-
     fun onPhotoAdded() {
         viewModelScope.launch {
             updatePhoto()
@@ -104,11 +101,6 @@ class ShotDetailsViewModel (
         withContext(Dispatchers.IO) {
             database.updateImage(key.toLong(), imageUriString.value!!)
         }
-    }
-
-
-    init {
-        initShot()
     }
 
     fun initShot() {
@@ -123,24 +115,9 @@ class ShotDetailsViewModel (
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.N)
-    val MyDateFormat = SimpleDateFormat("dd.MM.yyyy")
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    val MyTimeFormat = SimpleDateFormat("h:mm a")
-
-
-
-
-
-    val REQUEST_GET_PIC = 1
-    val getPictureIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-        type = "image/*"
+    init {
+        initShot()
     }
-
-
-
-
 
 }
 

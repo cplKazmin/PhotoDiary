@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.graphics.ImageDecoder.createSource
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
@@ -24,6 +22,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.ikazmin.photodiary.R
+import com.ikazmin.photodiary.Utils
 import com.ikazmin.photodiary.databinding.ShotDetailsFragmentBinding
 import com.ikazmin.photodiary.shotDatabase.Shot
 import com.ikazmin.photodiary.shotDatabase.ShotDatabase
@@ -32,7 +31,6 @@ import kotlinx.android.synthetic.main.shot_details_fragment.*
 
 class ShotDetailsFragment : Fragment() {
 
-    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, SavedInstanceState: Bundle?): View?{
 
@@ -51,14 +49,13 @@ class ShotDetailsFragment : Fragment() {
             this,viewModelFactory).get(ShotDetailsViewModel::class.java)
 
 
-
         val shotObserver = Observer<Shot> { newShot ->
             binding.shotName.text = newShot.name
             binding.shotIso.text = newShot.iso
             binding.shotDiafragm.text = newShot.diafragm
             binding.shotShutterspeed.text = newShot.shutterSpeed
-            binding.shotDate.text = shotDetailsViewModel.MyDateFormat.format(newShot.date)
-            binding.shotTime.text = shotDetailsViewModel.MyTimeFormat.format(newShot.date)
+            binding.shotDate.text = Utils.myDateFormat.format(newShot.date)
+            binding.shotTime.text = Utils.myTimeFormat.format(newShot.date)
             binding.shotDescriptionEdittext.setText(newShot.shortDescription)
             try {
                 if (newShot.imageUri.isNotEmpty()) {

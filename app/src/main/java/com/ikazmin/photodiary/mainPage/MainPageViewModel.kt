@@ -5,11 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import com.ikazmin.photodiary.shotDatabase.ShotDao
 
 class MainPageViewModel(
-    private val database: ShotDao,
+    database: ShotDao,
     application: Application):AndroidViewModel(application){
-
-
         val shots = database.getAllShots()
-
-
 }

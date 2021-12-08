@@ -31,10 +31,8 @@ class MainPageFragment : Fragment(),ShotOnClickListener {
             inflater, R.layout.fragment_main_page,container,false
         )
 
-
         //Toolbar
         binding.myToolbar.setupWithNavController(findNavController())
-
         binding.myToolbar.setTitleTextColor(resources.getColor(R.color.blue))
 
 
