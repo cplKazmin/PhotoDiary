@@ -1,16 +1,12 @@
 package com.ikazmin.photodiary.newFilm
 
 import android.app.Application
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.room.Database
 import com.ikazmin.photodiary.shotDatabase.Shot
 import com.ikazmin.photodiary.shotDatabase.ShotDao
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class NewShotFragmentViewModel(
@@ -44,4 +40,9 @@ class NewShotFragmentViewModel(
         }
         _navigateToMainPage.value = true
     }
+
+    fun isFilled(name:String,iso: String,shutterSpeed: String,diafragm: String):Boolean{
+        return name.isNotEmpty()&&iso.isNotEmpty()&&shutterSpeed.isNotEmpty()&&diafragm.isNotEmpty()
+    }
+
 }

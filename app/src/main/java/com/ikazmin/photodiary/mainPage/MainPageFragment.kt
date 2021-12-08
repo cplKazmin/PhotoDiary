@@ -1,6 +1,6 @@
 package com.ikazmin.photodiary.mainPage
 
-import android.app.ActionBar
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,23 +15,28 @@ import androidx.navigation.fragment.findNavController
 import com.ikazmin.photodiary.R
 import com.ikazmin.photodiary.databinding.FragmentMainPageBinding
 import com.ikazmin.photodiary.shotDatabase.ShotDatabase
+import androidx.navigation.ui.setupWithNavController
+
 
 class MainPageFragment : Fragment(),ShotOnClickListener {
 
     override fun onCreateView(
-
-
-
-
-
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
 
         //Binding
         val binding: FragmentMainPageBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_main_page,container,false
         )
+
+
+        //Toolbar
+        binding.myToolbar.setupWithNavController(findNavController())
+
+        binding.myToolbar.setTitleTextColor(resources.getColor(R.color.blue))
+
 
         //Работа с БД
         val application = requireNotNull(this.activity).application
@@ -47,7 +52,7 @@ class MainPageFragment : Fragment(),ShotOnClickListener {
         binding.shotList.adapter = adapter
         mainPageViewModel.shots.observe(viewLifecycleOwner, Observer {
             it?.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         })
 
@@ -63,6 +68,7 @@ class MainPageFragment : Fragment(),ShotOnClickListener {
         val bundle = bundleOf("key" to key)
               findNavController().navigate(R.id.action_mainPageFragment_to_shotDetailsFragment,bundle)
     }
+
 
 
 }

@@ -7,28 +7,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ikazmin.photodiary.R
 import com.ikazmin.photodiary.shotDatabase.Shot
+import androidx.recyclerview.widget.ListAdapter
 
-class ShotAdapter (private val shotOnClickListener: ShotOnClickListener)  : RecyclerView.Adapter<ShotAdapter.ViewHolder>() {
-    //БД
-    var data = listOf<Shot>()
-    set(value){
-        field =  value
-        notifyDataSetChanged()
-    }
+class ShotAdapter (private val shotOnClickListener: ShotOnClickListener)  : ListAdapter<Shot,ShotAdapter.ViewHolder>(ShotDiffCallback()) {
 
-    override fun getItemCount(): Int {
-        return data.size
-    }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
         holder.itemView.setOnClickListener {
-            shotOnClickListener.onShotItemClick(position,data[position].shotId.toString())
+            shotOnClickListener.onShotItemClick(position,getItem(position).shotId.toString())
         }
 
     }
@@ -73,7 +66,15 @@ class ShotAdapter (private val shotOnClickListener: ShotOnClickListener)  : Recy
         }
     }
 
+class ShotDiffCallback : DiffUtil.ItemCallback<Shot>(){
+    override fun areItemsTheSame(oldItem: Shot, newItem: Shot): Boolean {
+        return oldItem.shotId == newItem.shotId
+    }
 
+    override fun areContentsTheSame(oldItem: Shot, newItem: Shot): Boolean {
+        return oldItem == newItem
+    }
+}
 
 
 

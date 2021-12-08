@@ -2,42 +2,49 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation.xml"
     app:startDestination="@id/mainPageFragment">
     <fragment
         android:id="@+id/mainPageFragment"
         android:name="com.ikazmin.photodiary.mainPage.MainPageFragment"
-        android:label="fragment_main_page"
+        android:label="Photo Diary"
         tools:layout="@layout/fragment_main_page" >
         <action
             android:id="@+id/action_mainPageFragment_to_newShotFragment"
             app:destination="@id/newShotFragment"
-            app:popUpTo="@id/newShotFragment" />
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/mainPageFragment" />
         <action
             android:id="@+id/action_mainPageFragment_to_shotDetailsFragment"
             app:destination="@id/shotDetailsFragment"
-            app:popUpTo="@id/shotDetailsFragment" />
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/mainPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/newShotFragment"
         android:name="com.ikazmin.photodiary.newFilm.NewShotFragment"
-        android:label="fragment_newshot"
+        android:label="Create new shot"
         tools:layout="@layout/fragment_newshot" >
         <action
             android:id="@+id/action_newShotFragment_to_mainPageFragment"
             app:destination="@id/mainPageFragment"
-            app:popUpTo="@id/mainPageFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/newShotFragment"
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/shotDetailsFragment"
         android:name="com.ikazmin.photodiary.shotdetails.ShotDetailsFragment"
-        android:label="shot_details_fragment"
+        android:label="Shot Info"
         tools:layout="@layout/shot_details_fragment" >
         <action
             android:id="@+id/action_shotDetailsFragment_to_mainPageFragment"
             app:destination="@id/mainPageFragment"
-            app:popUpTo="@id/mainPageFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/shotDetailsFragment"
             app:popUpToInclusive="true" />
     </fragment>
 </navigation>

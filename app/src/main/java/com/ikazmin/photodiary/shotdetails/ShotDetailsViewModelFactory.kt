@@ -12,7 +12,7 @@ class ShotDetailsViewModelFactory (
     private val application: Application, private val key:String
         ):ViewModelProvider.Factory{
     @Suppress("unchecked cast")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ShotDetailsViewModel::class.java)){
             return ShotDetailsViewModel(dataSource,application,key) as T
         }

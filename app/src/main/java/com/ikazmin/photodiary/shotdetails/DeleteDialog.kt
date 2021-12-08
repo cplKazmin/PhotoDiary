@@ -20,11 +20,11 @@ class DeleteDialog : DialogFragment() {
             val builder = AlertDialog.Builder(it)
             builder.setTitle("Delete the shot").setMessage("Are you shure").
             setCancelable(true).
-            setPositiveButton(Html.fromHtml("<font color='#B89561'>Yes</font>")){ dialog, id ->
+            setPositiveButton(Html.fromHtml("<font color='#424B80'>Yes</font>")){ dialog, id ->
                 Toast.makeText(activity, "Deleted!",Toast.LENGTH_SHORT).show()
                 isPositive.value = true
             }
-                .setNegativeButton(Html.fromHtml("<font color='#B89561'>No</font>")){dialog,id->
+                .setNegativeButton(Html.fromHtml("<font color='#424B80'>No</font>")){dialog,id->
 
                 }
 

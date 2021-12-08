@@ -3,6 +3,7 @@ package com.ikazmin.photodiary.shotDatabase
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.net.URI
 
 @Entity(tableName = "shot_table")
 data class Shot(
@@ -25,5 +26,8 @@ data class Shot(
     val iso: String = "Empty",
 
     @ColumnInfo(name = "short_description")
-    val shortDescription: String = ""
+    val shortDescription: String = "",
+
+    @ColumnInfo (name = "image")
+       val imageUri: String = ""
 )

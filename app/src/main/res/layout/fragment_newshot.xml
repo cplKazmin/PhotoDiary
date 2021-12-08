@@ -8,6 +8,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:titleTextColor="@color/light_brown"
+            app:navigationIconTint="@color/light_brown"
+            app:navigationIcon="@drawable/back_button"
+
+
+            />
+
+
         <EditText
             android:id="@+id/iso_text"
             android:layout_width="0dp"
@@ -16,12 +35,12 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="106dp"
             android:ems="10"
             android:hint="ISO"
             android:inputType="number"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/shutter_speed_text"
+            app:layout_constraintBottom_toTopOf="@+id/diafragm_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/film_name_text"
@@ -33,17 +52,16 @@
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
             android:ems="10"
             android:hint="Shutter speed"
             android:inputType="textNoSuggestions"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/diafragm_text"
+            app:layout_constraintBottom_toTopOf="@+id/save_button"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iso_text"
+            app:layout_constraintTop_toBottomOf="@+id/diafragm_text"
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
@@ -52,27 +70,25 @@
             android:layout_height="wrap_content"
             android:layout_margin="32dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="159dp"
             android:ems="10"
             android:hint="Diafragm"
             android:inputType="textNoSuggestions"
             android:textAlignment="center"
-            app:layout_constraintBottom_toTopOf="@+id/save_button"
+            app:layout_constraintBottom_toTopOf="@+id/shutter_speed_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shutter_speed_text"
+            app:layout_constraintTop_toBottomOf="@+id/iso_text"
             tools:ignore="TouchTargetSizeCheck" />
 
         <EditText
             android:id="@+id/film_name_text"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_margin="32dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="16dp"
             android:ems="10"
@@ -83,7 +99,7 @@
             app:layout_constraintBottom_toTopOf="@+id/iso_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
             tools:ignore="TouchTargetSizeCheck" />
 
         <Button
@@ -92,6 +108,7 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginBottom="16dp"
             android:text="SAVE"
+            android:textColor="@color/blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"

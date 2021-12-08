@@ -8,10 +8,14 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.graphics.toColorInt
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.ikazmin.photodiary.R
 import com.ikazmin.photodiary.databinding.FragmentNewshotBinding
 
@@ -24,6 +28,12 @@ class NewShotFragment : Fragment() {
         val binding: FragmentNewshotBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_newshot,container,false
         )
+
+        //Toolbar
+        binding.myToolbar.setupWithNavController(findNavController())
+        binding.myToolbar.setNavigationIcon(R.drawable.back_button)
+        binding.myToolbar.setTitleTextColor(resources.getColor(R.color.blue))
+
 
         //БД
         val application = requireNotNull(this.activity).application
@@ -42,20 +52,27 @@ class NewShotFragment : Fragment() {
             val diafragm = binding.diafragmText.text.toString()
             val shutterSpeed =  binding.shutterSpeedText.text.toString()
 
+            if (newFilmFragmentViewModel.isFilled(name,iso,shutterSpeed,diafragm)){
             newFilmFragmentViewModel.onSaveButtonPressed(
                 iso = "iso:$iso",
                 name = name,
-                diafragm = "aperture:$diafragm",
+                diafragm = "ap:$diafragm",
                 shutterSpeed = "sh/s:$shutterSpeed",
-            )
+            )}
+            else
+                Toast.makeText(activity?.applicationContext,"Please, complete the information",Toast.LENGTH_SHORT).show()
         }
+
+
+
 
         //навигация
         newFilmFragmentViewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer {
-            if (it==true){
+            if (it==true ){
                 this.findNavController().navigate(R.id.action_newShotFragment_to_mainPageFragment)
                 newFilmFragmentViewModel.doneNavigating()
             }
+
         })
 
         return binding.root

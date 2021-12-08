@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.34427083333333336" />
+        <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/drawable/back_button.xml" value="0.34427083333333336" />
+        <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/drawable/ic_baseline_add_circle_24.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/drawable/ic_baseline_camera_roll_24.xml" value="0.3458333333333333" />
+        <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/drawable/ic_launcher_background.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/drawable/my_border.xml" value="0.34427083333333336" />
         <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/layout/activity_main.xml" value="0.33" />
@@ -13,7 +17,7 @@
         <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/layout/fragment_newshot.xml" value="0.33" />
         <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/layout/list_item_shot.xml" value="0.67" />
         <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/layout/menu.xml" value="0.328125" />
-        <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/layout/shot_details_fragment.xml" value="0.5" />
+        <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/layout/shot_details_fragment.xml" value="0.33" />
         <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/menu/menu_main.xml" value="0.55" />
         <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/menu/my_menu.xml" value="0.328125" />
         <entry key="..\:/Users/ikazm/AndroidStudioProjects/PhotoDiary/app/src/main/res/menu/share_menu.xml" value="0.328125" />
