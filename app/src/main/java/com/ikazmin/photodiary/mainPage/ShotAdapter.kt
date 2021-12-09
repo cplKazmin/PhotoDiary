@@ -40,12 +40,12 @@ class ShotAdapter (private val shotOnClickListener: ShotOnClickListener)  : List
 
     inner class ViewHolder (ItemView: View) : RecyclerView.ViewHolder(ItemView){
 
-        private val shotName: TextView = itemView.findViewById(R.id.shot_name)
-        private val shotIso: TextView = itemView.findViewById(R.id.shot_iso)
-        private val shotDiafragm: TextView = itemView.findViewById(R.id.shot_diafragm)
-        private val shotShutterSpeed: TextView = itemView.findViewById(R.id.shot_shutterspeed)
-        private val shotDate: TextView = itemView.findViewById(R.id.shot_date)
-        private val shotTime: TextView = itemView.findViewById(R.id.shot_time)
+         val shotName: TextView = itemView.findViewById(R.id.shot_name)
+         val shotIso: TextView = itemView.findViewById(R.id.shot_iso)
+         val shotDiafragm: TextView = itemView.findViewById(R.id.shot_diafragm)
+         val shotShutterSpeed: TextView = itemView.findViewById(R.id.shot_shutterspeed)
+         val shotDate: TextView = itemView.findViewById(R.id.shot_date)
+         val shotTime: TextView = itemView.findViewById(R.id.shot_time)
 
 
 

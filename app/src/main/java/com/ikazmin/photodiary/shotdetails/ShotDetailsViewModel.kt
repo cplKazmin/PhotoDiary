@@ -10,8 +10,7 @@ import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
-import android.graphics.ImageDecoder.ImageInfo
-import android.graphics.ImageDecoder.OnHeaderDecodedListener
+import android.graphics.ImageDecoder.*
 import android.icu.text.SimpleDateFormat
 import android.media.Image
 import android.net.Uri
@@ -117,6 +116,24 @@ class ShotDetailsViewModel (
 
     init {
         initShot()
+    }
+
+
+    val bitmap = MutableLiveData<Bitmap>()
+
+    fun getFormattedBitmap(resolver:ContentResolver,shot:Shot){
+        viewModelScope.launch {
+           bitmap.value = getFormattedBitmapCoroutine(resolver,shot)
+        }
+    }
+
+    private suspend fun getFormattedBitmapCoroutine(resolver:ContentResolver,shot:Shot):Bitmap{
+        val source = createSource(resolver,Uri.parse(shot.imageUri))
+        return withContext(Dispatchers.IO){  decodeBitmap(source){
+            decoder: ImageDecoder, info: ImageInfo?, src: Source ->
+            decoder.setTargetSampleSize(2)
+        }
+        }
     }
 
 }

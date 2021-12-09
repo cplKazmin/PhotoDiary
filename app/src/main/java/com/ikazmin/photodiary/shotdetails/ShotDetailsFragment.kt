@@ -5,15 +5,20 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.graphics.ImageDecoder.createSource
+import android.graphics.ImageDecoder.decodeBitmap
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.ActionBar.DISPLAY_SHOW_HOME
+import androidx.appcompat.app.ActionBar.DISPLAY_USE_LOGO
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
@@ -64,19 +69,12 @@ class ShotDetailsFragment : Fragment() {
                         Uri.parse(newShot.imageUri),
                         Intent.FLAG_GRANT_READ_URI_PERMISSION
                     )
-                    val source = createSource(resolver, Uri.parse(newShot.imageUri))
-                    val bitmap: Bitmap =
-                        ImageDecoder.decodeBitmap(source) {
-                                decoder: ImageDecoder, info: ImageDecoder.ImageInfo?,
-                                src: ImageDecoder.Source? -> decoder.setTargetSampleSize(2)
-                        }
-                    binding.imageView3.setImageBitmap(bitmap)
+                    shotDetailsViewModel.getFormattedBitmap(resolver,newShot)
                 }
             } catch (e:SecurityException) {
                 Toast.makeText(activity?.applicationContext,"no image found",Toast.LENGTH_SHORT).show()
             }
         }
-
 
         val dialogObserver = Observer<Boolean> {
             if (it == true){
@@ -92,15 +90,12 @@ class ShotDetailsFragment : Fragment() {
         }
 
 
-        val toolbar = binding.myToolbar
-            toolbar.setupWithNavController(findNavController())
-            toolbar.setNavigationIcon(R.drawable.back_button)
-            toolbar.inflateMenu(R.menu.my_menu)
-            binding.myToolbar.setTitleTextColor(resources.getColor(R.color.blue))
-            toolbar.setOnMenuItemClickListener(Toolbar.OnMenuItemClickListener {
-                 startActivity(Intent.createChooser(shotDetailsViewModel.sendIntent,null))
-                 return@OnMenuItemClickListener true
-        })
+        setHasOptionsMenu(true)
+        val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
+        actionBar?.subtitle = "shot info";
+        actionBar?.setHomeButtonEnabled(true)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+
 
 
         val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -114,6 +109,9 @@ class ShotDetailsFragment : Fragment() {
         }
 
 
+        shotDetailsViewModel.bitmap.observe(viewLifecycleOwner, {
+            binding.imageView3.setImageBitmap(it)
+        })
 
         shotDetailsViewModel.dialog.isPositive.observe(viewLifecycleOwner,dialogObserver)
 
@@ -138,4 +136,13 @@ class ShotDetailsFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == android.R.id.home){
+            findNavController().navigate(R.id.action_shotDetailsFragment_to_mainPageFragment)
+            true
+        } else false
+    }
+
+
 }

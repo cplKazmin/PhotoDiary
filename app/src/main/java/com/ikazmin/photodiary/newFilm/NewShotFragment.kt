@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.graphics.toColorInt
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -29,10 +30,14 @@ class NewShotFragment : Fragment() {
             inflater, R.layout.fragment_newshot,container,false
         )
 
-        //Toolbar
-        binding.myToolbar.setupWithNavController(findNavController())
-        binding.myToolbar.setNavigationIcon(R.drawable.back_button)
-        binding.myToolbar.setTitleTextColor(resources.getColor(R.color.blue))
+        setHasOptionsMenu(true)
+        val actionBar =   (activity as AppCompatActivity?)!!.supportActionBar
+        actionBar?.subtitle = "new shot";
+        actionBar?.setHomeButtonEnabled(true)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+
+
+
 
 
         //БД
@@ -76,6 +81,13 @@ class NewShotFragment : Fragment() {
         })
 
         return binding.root
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == android.R.id.home){
+            findNavController().navigate(R.id.action_newShotFragment_to_mainPageFragment)
+            true
+        } else false
     }
 
 

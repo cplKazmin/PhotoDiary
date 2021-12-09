@@ -1,21 +1,26 @@
 package com.ikazmin.photodiary.mainPage
 
 
+import android.app.ActionBar
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import com.ikazmin.photodiary.R
 import com.ikazmin.photodiary.databinding.FragmentMainPageBinding
 import com.ikazmin.photodiary.shotDatabase.ShotDatabase
 import androidx.navigation.ui.setupWithNavController
+import com.ikazmin.photodiary.MainActivity
+import androidx.appcompat.app.AppCompatActivity
+
+
+
 
 
 class MainPageFragment : Fragment(),ShotOnClickListener {
@@ -31,15 +36,17 @@ class MainPageFragment : Fragment(),ShotOnClickListener {
             inflater, R.layout.fragment_main_page,container,false
         )
 
-        //Toolbar
-        binding.myToolbar.setupWithNavController(findNavController())
-        binding.myToolbar.setTitleTextColor(resources.getColor(R.color.blue))
+
+        setHasOptionsMenu(true)
+        val actionBar =   (activity as AppCompatActivity?)!!.supportActionBar
+        actionBar?.subtitle = "shots";
+        actionBar?.setHomeButtonEnabled(false)
+        actionBar?.setDisplayHomeAsUpEnabled(false)
 
 
         //Работа с БД
         val application = requireNotNull(this.activity).application
         val dataSource = ShotDatabase.getInstance(application).shotDao
-
         //ViewModel
         val viewModelFactory = MainPageViewModelFactory(dataSource,application)
         val mainPageViewModel =ViewModelProvider(
@@ -67,6 +74,16 @@ class MainPageFragment : Fragment(),ShotOnClickListener {
               findNavController().navigate(R.id.action_mainPageFragment_to_shotDetailsFragment,bundle)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main_fragment_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home){
+            findNavController().navigate(R.id.action_mainPageFragment_to_newShotFragment)
+            return true}
+        else return false
+    }
 
 
 }
