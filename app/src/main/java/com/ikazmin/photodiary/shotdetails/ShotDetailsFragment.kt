@@ -8,11 +8,8 @@ import android.graphics.ImageDecoder.createSource
 import android.graphics.ImageDecoder.decodeBitmap
 import android.net.Uri
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -35,6 +32,14 @@ import kotlinx.android.synthetic.main.fragment_main_page.*
 import kotlinx.android.synthetic.main.shot_details_fragment.*
 
 class ShotDetailsFragment : Fragment() {
+    private val shotDetailsViewModel: ShotDetailsViewModel by lazy {
+        val application = requireNotNull(this.activity).application
+        val key = arguments?.getString("key")
+        val dataSource = ShotDatabase.getInstance(application).shotDao
+        val viewModelFactory = ShotDetailsViewModelFactory(
+            dataSource,application,key!!)
+        ViewModelProvider(this, viewModelFactory).get(ShotDetailsViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, SavedInstanceState: Bundle?): View?{
@@ -42,16 +47,18 @@ class ShotDetailsFragment : Fragment() {
         val binding: ShotDetailsFragmentBinding = DataBindingUtil.inflate(
             inflater,R.layout.shot_details_fragment,container,false)
 
-        val key = arguments?.getString("key")
+//        val key = arguments?.getString("key")
+//
+//        val application = requireNotNull(this.activity).application
+//
+//        val dataSource = ShotDatabase.getInstance(application).shotDao
+//
+//        val viewModelFactory = ShotDetailsViewModelFactory(dataSource,application,key!!)
+//
+//        val shotDetailsViewModel = ViewModelProvider(
+//            this,viewModelFactory).get(ShotDetailsViewModel::class.java)
 
-        val application = requireNotNull(this.activity).application
 
-        val dataSource = ShotDatabase.getInstance(application).shotDao
-
-        val viewModelFactory = ShotDetailsViewModelFactory(dataSource,application,key!!)
-
-        val shotDetailsViewModel = ViewModelProvider(
-            this,viewModelFactory).get(ShotDetailsViewModel::class.java)
 
 
         val shotObserver = Observer<Shot> { newShot ->
@@ -134,15 +141,25 @@ class ShotDetailsFragment : Fragment() {
         }
 
 
+
         return binding.root
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == android.R.id.home){
-            findNavController().navigate(R.id.action_shotDetailsFragment_to_mainPageFragment)
-            true
-        } else false
+        when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().navigate(R.id.action_shotDetailsFragment_to_mainPageFragment)
+            }
+            R.id.shareButton -> {
+                startActivity(shotDetailsViewModel.getIntent())
+            }
+        }
+        return true
     }
 
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.my_menu, menu)
+
+    }
 }

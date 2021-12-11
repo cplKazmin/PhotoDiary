@@ -50,17 +50,9 @@ class ShotDetailsViewModel (
 
     val imageUriString = MutableLiveData<String>()
 
-    val textForShare=
-        "Shot name: ${shot.value?.name}\n" +
-                " ${shot.value?.iso}\n" +
-                " ${shot.value?.diafragm}\n " +
-                "${shot.value?.shutterSpeed}"
+    private lateinit var textForShare: String
 
-
-    val sendIntent: Intent = Intent().apply {
-        action = Intent.ACTION_SEND
-        type = "text/*"
-        putExtra(Intent.EXTRA_TEXT, textForShare)}
+    private lateinit var sendIntent: Intent
 
     val getPictureIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
         type = "image/*"
@@ -118,6 +110,21 @@ class ShotDetailsViewModel (
         initShot()
     }
 
+    fun getIntent(): Intent {
+        textForShare =
+            "Shot name: ${shot.value?.name}\n" +
+                    "${shot.value?.iso}\n" +
+                    "${shot.value?.diafragm}\n" +
+                    "${shot.value?.shutterSpeed}"
+        //Log.d("ShotDetailsVM", "${shot.value.toString()}")
+        sendIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, textForShare)
+        }
+        return sendIntent
+    }
+
 
     val bitmap = MutableLiveData<Bitmap>()
 
@@ -135,6 +142,8 @@ class ShotDetailsViewModel (
         }
         }
     }
+
+
 
 }
 
