@@ -1,15 +1,11 @@
 package com.ikazmin.photodiary.shotdetails
 
-import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
 import android.text.Html
 import android.widget.Toast
-import androidx.annotation.ColorLong
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.MutableLiveData
-import java.lang.IllegalStateException
 
 class DeleteDialog : DialogFragment() {
 

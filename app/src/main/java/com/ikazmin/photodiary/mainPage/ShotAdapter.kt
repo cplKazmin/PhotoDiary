@@ -1,6 +1,5 @@
 package com.ikazmin.photodiary.mainPage
 
-import android.icu.text.SimpleDateFormat
 import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.ikazmin.photodiary.R
-import com.ikazmin.photodiary.shotDatabase.Shot
-import androidx.recyclerview.widget.ListAdapter
-import com.ikazmin.photodiary.Utils
 import com.ikazmin.photodiary.Utils.myDateFormat
 import com.ikazmin.photodiary.Utils.myTimeFormat
+import com.ikazmin.photodiary.shotDatabase.Shot
 
 class ShotAdapter (private val shotOnClickListener: ShotOnClickListener)  : ListAdapter<Shot,ShotAdapter.ViewHolder>(ShotDiffCallback()) {
 
@@ -40,12 +38,12 @@ class ShotAdapter (private val shotOnClickListener: ShotOnClickListener)  : List
 
     inner class ViewHolder (ItemView: View) : RecyclerView.ViewHolder(ItemView){
 
-         val shotName: TextView = itemView.findViewById(R.id.shot_name)
-         val shotIso: TextView = itemView.findViewById(R.id.shot_iso)
-         val shotDiafragm: TextView = itemView.findViewById(R.id.shot_diafragm)
-         val shotShutterSpeed: TextView = itemView.findViewById(R.id.shot_shutterspeed)
-         val shotDate: TextView = itemView.findViewById(R.id.shot_date)
-         val shotTime: TextView = itemView.findViewById(R.id.shot_time)
+         private val shotName: TextView = itemView.findViewById(R.id.shot_name)
+         private val shotIso: TextView = itemView.findViewById(R.id.shot_iso)
+         private val shotDiafragm: TextView = itemView.findViewById(R.id.shot_diafragm)
+         private val shotShutterSpeed: TextView = itemView.findViewById(R.id.shot_shutterspeed)
+         private val shotDate: TextView = itemView.findViewById(R.id.shot_date)
+         private val shotTime: TextView = itemView.findViewById(R.id.shot_time)
 
 
 

@@ -2,34 +2,24 @@ package com.ikazmin.photodiary.shotdetails
 
 import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.ImageDecoder
-import android.graphics.ImageDecoder.createSource
-import android.graphics.ImageDecoder.decodeBitmap
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.ActionBar.DISPLAY_SHOW_HOME
-import androidx.appcompat.app.ActionBar.DISPLAY_USE_LOGO
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.ikazmin.photodiary.R
 import com.ikazmin.photodiary.Utils
 import com.ikazmin.photodiary.databinding.ShotDetailsFragmentBinding
 import com.ikazmin.photodiary.shotDatabase.Shot
 import com.ikazmin.photodiary.shotDatabase.ShotDatabase
-import kotlinx.android.synthetic.main.fragment_main_page.*
-import kotlinx.android.synthetic.main.shot_details_fragment.*
 
 class ShotDetailsFragment : Fragment() {
     private val shotDetailsViewModel: ShotDetailsViewModel by lazy {
@@ -42,7 +32,7 @@ class ShotDetailsFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, SavedInstanceState: Bundle?): View?{
+        inflater: LayoutInflater, container: ViewGroup?, SavedInstanceState: Bundle?): View {
 
         val binding: ShotDetailsFragmentBinding = DataBindingUtil.inflate(
             inflater,R.layout.shot_details_fragment,container,false)
@@ -99,7 +89,7 @@ class ShotDetailsFragment : Fragment() {
 
         setHasOptionsMenu(true)
         val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
-        actionBar?.subtitle = "shot info";
+        actionBar?.subtitle = "shot info"
         actionBar?.setHomeButtonEnabled(true)
         actionBar?.setDisplayHomeAsUpEnabled(true)
 

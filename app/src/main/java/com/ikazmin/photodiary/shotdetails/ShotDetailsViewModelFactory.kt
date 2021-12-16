@@ -1,11 +1,9 @@
 package com.ikazmin.photodiary.shotdetails
 
 import android.app.Application
-import android.app.KeyguardManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ikazmin.photodiary.shotDatabase.ShotDao
-import java.lang.IllegalArgumentException
 
 class ShotDetailsViewModelFactory (
     private val dataSource: ShotDao,

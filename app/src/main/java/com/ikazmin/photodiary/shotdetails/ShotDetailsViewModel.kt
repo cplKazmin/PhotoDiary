@@ -2,24 +2,12 @@ package com.ikazmin.photodiary.shotdetails
 
 
 import android.app.Application
-import android.content.ActivityNotFoundException
 import android.content.ContentResolver
-import android.content.Context
 import android.content.Intent
-import android.database.Cursor
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.graphics.ImageDecoder.*
-import android.icu.text.SimpleDateFormat
-import android.media.Image
 import android.net.Uri
-import android.os.Build
-import android.provider.MediaStore
-import android.util.Log
-import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -29,7 +17,6 @@ import com.ikazmin.photodiary.shotDatabase.ShotDao
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.net.URI
 
 
 class ShotDetailsViewModel (
@@ -49,10 +36,6 @@ class ShotDetailsViewModel (
     val description = MutableLiveData<String>()
 
     val imageUriString = MutableLiveData<String>()
-
-    private lateinit var textForShare: String
-
-    private lateinit var sendIntent: Intent
 
     val getPictureIntent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
         type = "image/*"
@@ -111,13 +94,12 @@ class ShotDetailsViewModel (
     }
 
     fun getIntent(): Intent {
-        textForShare =
+        val textForShare =
             "Shot name: ${shot.value?.name}\n" +
                     "${shot.value?.iso}\n" +
                     "${shot.value?.diafragm}\n" +
                     "${shot.value?.shutterSpeed}"
-        //Log.d("ShotDetailsVM", "${shot.value.toString()}")
-        sendIntent = Intent().apply {
+        val sendIntent = Intent().apply {
             action = Intent.ACTION_SEND
             type = "text/plain"
             putExtra(Intent.EXTRA_TEXT, textForShare)

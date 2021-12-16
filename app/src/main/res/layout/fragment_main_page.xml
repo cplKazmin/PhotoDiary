@@ -34,12 +34,13 @@
             android:layout_height="@dimen/button_height"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:fabCustomSize="65dp"
-            app:maxImageSize="40dp"
             android:src="@drawable/ic_baseline_add_24"
+            app:fabCustomSize="65dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:ignore="SpeakableTextPresentCheck" />
+            app:maxImageSize="40dp"
+            tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck"
+            android:contentDescription="@string/todo" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

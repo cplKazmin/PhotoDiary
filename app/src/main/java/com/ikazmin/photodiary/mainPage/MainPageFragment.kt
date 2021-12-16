@@ -1,26 +1,19 @@
 package com.ikazmin.photodiary.mainPage
 
 
-import android.app.ActionBar
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
 import com.ikazmin.photodiary.R
 import com.ikazmin.photodiary.databinding.FragmentMainPageBinding
 import com.ikazmin.photodiary.shotDatabase.ShotDatabase
-import androidx.navigation.ui.setupWithNavController
-import com.ikazmin.photodiary.MainActivity
-import androidx.appcompat.app.AppCompatActivity
-
-
-
 
 
 class MainPageFragment : Fragment(),ShotOnClickListener {
@@ -39,7 +32,7 @@ class MainPageFragment : Fragment(),ShotOnClickListener {
 
         setHasOptionsMenu(true)
         val actionBar =   (activity as AppCompatActivity?)!!.supportActionBar
-        actionBar?.subtitle = "shots";
+        actionBar?.subtitle = "shots"
         actionBar?.setHomeButtonEnabled(false)
         actionBar?.setDisplayHomeAsUpEnabled(false)
 
@@ -60,6 +53,7 @@ class MainPageFragment : Fragment(),ShotOnClickListener {
                 adapter.submitList(it)
             }
         })
+
 
         //Навигация на фрагмент добавления снимка
         binding.button.setOnClickListener(

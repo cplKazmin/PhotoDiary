@@ -3,5 +3,7 @@
     <color name="light_brown">#19204A</color>
     <color name="rexbrown">#4C3514</color>
     <color name="blue">#0B0D46</color>
-    <color name="grey_blue">#51598A</color>
+    <color name="grey_blue">#9DA8ED</color>
+    <color name="background_text">#358495EB</color>
+    <color name="background_text2">#465F76E8</color>
 </resources>

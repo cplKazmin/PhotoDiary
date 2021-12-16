@@ -1,12 +1,10 @@
 package com.ikazmin.photodiary.shotDatabase
 
-import android.graphics.Bitmap
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import java.net.URI
 
 @Dao
 interface ShotDao{
