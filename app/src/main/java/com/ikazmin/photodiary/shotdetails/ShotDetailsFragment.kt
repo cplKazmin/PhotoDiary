@@ -22,6 +22,8 @@ import com.ikazmin.photodiary.shotDatabase.Shot
 import com.ikazmin.photodiary.shotDatabase.ShotDatabase
 
 class ShotDetailsFragment : Fragment() {
+
+    //vm
     private val shotDetailsViewModel: ShotDetailsViewModel by lazy {
         val application = requireNotNull(this.activity).application
         val key = arguments?.getString("key")
@@ -34,23 +36,11 @@ class ShotDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, SavedInstanceState: Bundle?): View {
 
+        //binding
         val binding: ShotDetailsFragmentBinding = DataBindingUtil.inflate(
             inflater,R.layout.shot_details_fragment,container,false)
 
-//        val key = arguments?.getString("key")
-//
-//        val application = requireNotNull(this.activity).application
-//
-//        val dataSource = ShotDatabase.getInstance(application).shotDao
-//
-//        val viewModelFactory = ShotDetailsViewModelFactory(dataSource,application,key!!)
-//
-//        val shotDetailsViewModel = ViewModelProvider(
-//            this,viewModelFactory).get(ShotDetailsViewModel::class.java)
-
-
-
-
+    //observers
         val shotObserver = Observer<Shot> { newShot ->
             binding.shotName.text = newShot.name
             binding.shotIso.text = newShot.iso
@@ -86,7 +76,7 @@ class ShotDetailsFragment : Fragment() {
             }
         }
 
-
+    //appbar
         setHasOptionsMenu(true)
         val actionBar = (activity as AppCompatActivity?)!!.supportActionBar
         actionBar?.subtitle = "shot info"

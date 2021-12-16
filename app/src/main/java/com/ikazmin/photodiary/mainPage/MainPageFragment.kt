@@ -37,15 +37,16 @@ class MainPageFragment : Fragment(),ShotOnClickListener {
         actionBar?.setDisplayHomeAsUpEnabled(false)
 
 
-        //Работа с БД
+        //ROOM
         val application = requireNotNull(this.activity).application
         val dataSource = ShotDatabase.getInstance(application).shotDao
+
         //ViewModel
         val viewModelFactory = MainPageViewModelFactory(dataSource,application)
         val mainPageViewModel =ViewModelProvider(
                 this,viewModelFactory).get(MainPageViewModel::class.java)
 
-        //Работа с Ресайклером
+        //Recycler
         val adapter = ShotAdapter(this)
         binding.shotList.adapter = adapter
         mainPageViewModel.shots.observe(viewLifecycleOwner, Observer {
@@ -55,14 +56,14 @@ class MainPageFragment : Fragment(),ShotOnClickListener {
         })
 
 
-        //Навигация на фрагмент добавления снимка
+        //Nav
         binding.button.setOnClickListener(
             Navigation.createNavigateOnClickListener(R.id.action_mainPageFragment_to_newShotFragment)
         )
         return binding.root
     }
 
-    //Обработка нажатия на элемент ресайклера
+    //On recycler item click
     override fun onShotItemClick(position: Int, key : String ) {
         val bundle = bundleOf("key" to key)
               findNavController().navigate(R.id.action_mainPageFragment_to_shotDetailsFragment,bundle)

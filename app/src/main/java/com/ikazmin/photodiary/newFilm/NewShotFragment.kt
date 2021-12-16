@@ -19,7 +19,7 @@ import com.ikazmin.photodiary.shotDatabase.ShotDatabase
 class NewShotFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        //Байндинг
+        //Binding
         val binding: FragmentNewshotBinding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_newshot,container,false
         )
@@ -34,7 +34,7 @@ class NewShotFragment : Fragment() {
 
 
 
-        //БД
+        //Room
         val application = requireNotNull(this.activity).application
         val dataSource = ShotDatabase.getInstance(application).shotDao
 
@@ -44,7 +44,7 @@ class NewShotFragment : Fragment() {
             ViewModelProvider(
                 this,viewModelFactory).get(NewShotFragmentViewModel::class.java)
 
-        //обработка нажатия сохран.
+        //save button onclick
         binding.saveButton.setOnClickListener {
             val iso = binding.isoText.text.toString()
             val name = binding.filmNameText.text.toString()
@@ -65,7 +65,7 @@ class NewShotFragment : Fragment() {
 
 
 
-        //навигация
+        //nav
         newFilmFragmentViewModel.navigateToMainPage.observe(viewLifecycleOwner, Observer {
             if (it==true ){
                 this.findNavController().navigate(R.id.action_newShotFragment_to_mainPageFragment)
