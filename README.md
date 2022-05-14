@@ -1,8 +1,8 @@
 # PhotoDiary
 
-## Android application pet project
+##  First Android Project
 
-This repo contains the source code of the PhotoDiary, simple app that can help analogue photographers with their shots systematization.
+This repo contains a lot of bad code, but this is how i started ;)
 
 ### Features:
 
